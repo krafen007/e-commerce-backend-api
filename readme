@@ -1,0 +1,79 @@
+# 🛒 E-Commerce Backend API
+
+A fully functional **E-Commerce backend** built with **Node.js, Express, and MongoDB**.
+This project demonstrates **authentication, role-based access control, cart management, and error handling** with a clean and scalable architecture.
+
+---
+
+## 🚀 Features
+
+- 🔑 **User Authentication & Authorization**
+
+  - Register / Login with JWT
+  - Role-based access (Admin, User)
+
+- 📦 **Product Management**
+
+  - Create, Read, Update, Delete products (Admin only)
+  - Public product listing & details
+
+- 🛒 **Shopping Cart**
+
+  - Add / Remove products from cart
+  - Auto calculate total price
+  - One active cart per user
+
+- ⚡ **Error Handling & Middlewares**
+  - Global error handler
+  - Authentication middleware
+  - Validation
+
+---
+
+## 🛠️ Tech Stack
+
+- **Node.js** + **Express.js**
+- **MongoDB** + **Mongoose**
+- **JWT**
+- **bcryptjs**
+- **Morgan**
+- **Dotenv**
+
+---
+
+## 📂 Project Structure
+
+📦 e-commerce-backend
+└── 📂 src
+├── 📂 config # Database and app configurations
+├── 📂 controllers # Route handlers (req → res)
+├── 📂 middlewares # Auth, error handling, validation middlewares
+├── 📂 models # Mongoose schemas & models
+├── 📂 routes # Express route definitions
+├── 📂 services # Business logic (decouple from controllers)
+├── 📂 validations # Joi validation schemas
+├── app.js # Express app setup
+└── server.js # Server bootstrap (start listening)
+
+---
+
+## 🔑 API Endpoints
+
+### 👤 Auth
+
+- `POST /api/users/register` → Register new user
+- `POST /api/users/login` → Login user
+
+### 📦 Products
+
+- `GET /api/product` → Get all products
+- `GET /api/product/:id` → Get single product
+- `POST /api/product` → Create product (Admin)
+- `PUT /api/product/:id` → Update product (Admin)
+- `DELETE /api/product/:id` → Delete product (Admin)
+
+### 🛒 Cart
+
+- `GET /api/cart` → Get user cart
+- `POST /api/cart/:productId` → Add item to cart
+- `DELETE /api/cart/:productId` → Remove item from cart
