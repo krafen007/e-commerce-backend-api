@@ -1,44 +1,37 @@
-/**
- * title
- * description
- * price
- * category enum [electric, food, clothes]
- */
-
-import mongoose from 'mongoose';
+import mongoose, { SchemaType } from 'mongoose';
 
 const productSchema = new mongoose.Schema(
-  {
-    title: {
-      type: String,
-      required: [true, 'Title of product is required'],
-      minlength: [5, 'Title must be at least 5 characters'],
-    },
+    {
+        title: {
+            type: String,
+            required: [true, 'Title of product is required'],
+            minlength: [5, 'Title must be at least 5 characters'],
+        },
 
-    description: {
-      type: String,
-      required: [true, 'Description of product is required'],
-      minlength: [5, 'Description must be at least 5 characters'],
-    },
+        description: {
+            type: String,
+            required: [true, 'Description of product is required'],
+            minlength: [5, 'Description must be at least 5 characters'],
+        },
 
-    price: {
-      type: Number,
-      required: [true, 'Price of product is required'],
-      min: 0,
-    },
+        price: {
+            type: Number,
+            required: [true, 'Price of product is required'],
+            min: 0,
+        },
 
-    category: {
-      type: String,
-      enum: ['electric', 'food', 'clothes'],
-      required: [true, 'Category is required'],
-    },
+        category: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Category',
+            required: [true, 'Category is required'],
+        },
 
-    image: {
-      type: String,
-      required: true,
+        image: {
+            type: String,
+            required: true,
+        },
     },
-  },
-  { timestamps: true },
+    { timestamps: true },
 );
 
 const productModel = mongoose.model('Product', productSchema);

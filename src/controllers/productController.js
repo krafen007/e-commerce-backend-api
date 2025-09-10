@@ -22,11 +22,13 @@ export const getProducts = asyncHandler(async (req, res) => {
     });
 
     res.status(200).json({
+        success: true,
+        statusCode: 200,
         message: 'Fetched products successfully',
         page: page,
         limit: limit,
-        totalProducts: countProducts,
-        totalPages: Math.ceil(countProducts / parseInt(limit)),
+        totalProducts: Object.values(products).length,
+        totalPages: Math.ceil(Object.keys(products).length / parseInt(limit || 10)),
         data: products,
     });
 });

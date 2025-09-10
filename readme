@@ -1,79 +1,133 @@
-# 🛒 E-Commerce Backend API
+🛒 E-Commerce Backend API
 
-A fully functional **E-Commerce backend** built with **Node.js, Express, and MongoDB**.
-This project demonstrates **authentication, role-based access control, cart management, and error handling** with a clean and scalable architecture.
+A fully functional E-Commerce backend built with Node.js, Express, and MongoDB.
+This project demonstrates authentication, role-based access control, product & category management, cart management, and global error handling with a clean and scalable architecture.
 
----
+🚀 Features
 
-## 🚀 Features
+🔑 User Authentication & Authorization
 
-- 🔑 **User Authentication & Authorization**
+Register / Login with JWT
 
-  - Register / Login with JWT
-  - Role-based access (Admin, User)
+Role-based access (Admin, Customer)
 
-- 📦 **Product Management**
+Protected routes with auth middleware
 
-  - Create, Read, Update, Delete products (Admin only)
-  - Public product listing & details
+📦 Product Management
 
-- 🛒 **Shopping Cart**
+Create, Read, Update, Delete products (Admin only)
 
-  - Add / Remove products from cart
-  - Auto calculate total price
-  - One active cart per user
+Public product listing & details
 
-- ⚡ **Error Handling & Middlewares**
-  - Global error handler
-  - Authentication middleware
-  - Validation
+Pagination and search by product title
 
----
+🏷️ Category Management
 
-## 🛠️ Tech Stack
+Create, Read, Update, Delete categories (Admin only)
 
-- **Node.js** + **Express.js**
-- **MongoDB** + **Mongoose**
-- **JWT**
-- **bcryptjs**
-- **Morgan**
-- **Dotenv**
+Public category listing & details
 
----
+Slug generation for categories
 
-## 📂 Project Structure
+🛒 Shopping Cart
 
-📦 e-commerce-backend
-└── 📂 src
-├── 📂 config # Database and app configurations
-├── 📂 controllers # Route handlers (req → res)
-├── 📂 middlewares # Auth, error handling, validation middlewares
-├── 📂 models # Mongoose schemas & models
-├── 📂 routes # Express route definitions
-├── 📂 services # Business logic (decouple from controllers)
-├── 📂 validations # Joi validation schemas
-├── app.js # Express app setup
-└── server.js # Server bootstrap (start listening)
+Add / Remove products from cart
 
----
+Decrement product quantity
 
-## 🔑 API Endpoints
+Auto calculate total price
 
-### 👤 Auth
+One active cart per user
 
-- `POST /api/users/register` → Register new user
-- `POST /api/users/login` → Login user
+⚡ Error Handling & Middlewares
 
-### 📦 Products
+Global error handler
 
-- `GET /api/product` → Get all products
-- `GET /api/product/:id` → Get single product
-- `POST /api/product` → Create product (Admin)
-- `PUT /api/product/:id` → Update product (Admin)
-- `DELETE /api/product/:id` → Delete product (Admin)
+Authentication middleware
 
-### 🛒 Cart
+Role-based permission middleware
 
-- `GET /api/cart` → Get user cart
-- `POST /api/cart/:productId` → Add item to cart
-- `DELETE /api/cart/:productId` → Remove item from cart
+Validation middleware (Joi)
+
+🛠️ Tech Stack
+
+    Node.js + Express.js
+
+    MongoDB + Mongoose
+
+    JWT
+
+    bcrypt
+
+    Morgan
+
+    Dotenv
+
+    Joi (Validation)
+
+📂 Project Structure
+
+    📦 e-commerce-backend
+    └── 📂 src
+        ├── 📂 config      # Database and app configurations
+        ├── 📂 controllers # Route handlers (req → res)
+        ├── 📂 middlewares # Auth, permission, validation, error handling
+        ├── 📂 models      # Mongoose schemas & models
+        ├── 📂 routes      # Express route definitions
+        ├── 📂 services    # Business logic
+        ├── 📂 validations # Joi validation schemas
+        ├── app.js         # Express app setup
+        └── server.js      # Server (start listening)
+
+🔑 API Endpoints
+👤 Auth
+
+    POST /api/users/register → Register new user
+
+    POST /api/users/login → Login user
+
+    GET /api/users/profile → Get logged-in user profile
+
+📦 Products
+
+    GET /api/product → Get all products (with optional search & pagination)
+
+    GET /api/product/:id → Get single product
+
+    POST /api/product → Create product (Admin only)
+
+    PUT /api/product/:id → Update product (Admin only)
+
+    DELETE /api/product/:id → Delete product (Admin only)
+
+🏷️ Categories
+
+    GET /api/categories → Get all categories
+
+    GET /api/categories/:id → Get single category
+
+    POST /api/categories → Create category (Admin only)
+
+    PUT /api/categories/:id → Update category (Admin only)
+
+    DELETE /api/categories/:id → Delete category (Admin only)
+
+🛒 Cart
+
+    GET /api/cart → Get user cart (Protected)
+
+    POST /api/cart/:productId?quantity=1 → Add item to cart (Protected)
+
+    PATCH /api/cart/:productId → Decrement product quantity in cart (Protected)
+
+    DELETE /api/cart/:productId → Remove item from cart (Protected)
+
+⚡ Notes
+
+    Only admins can manage products and categories.
+
+    JWT token should be sent in Authorization header as Bearer <token>.
+
+    All validations are handled with Joi and return detailed error messages.
+
+    Cart auto-calculates totalPrice on every modification

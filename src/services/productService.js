@@ -12,9 +12,10 @@ export const getProductsHandler = async ({ search, page, limit }) => {
             title: { $regex: search || '', $options: 'i' },
         })
         .skip(skip)
-        .limit(limitPages);
+        .limit(limitPages)
+        .populate('category', 'name image slug');
 
-    return { products };
+    return products;
 };
 
 // Get Product By Id Handler

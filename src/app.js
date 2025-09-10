@@ -4,7 +4,8 @@ import morgan from 'morgan';
 import cartRoute from './routes/cartRoute.js';
 import productRoute from './routes/productRoute.js';
 import userRoute from './routes/userRoute.js';
-import errorHandlerMiddleware from './middlewares/ErrorHandlerMiddleware.js';
+import categoryRoute from './routes/categoryRoute.js';
+import errorHandlerMiddleware from './middlewares/errorHandlerMiddleware.js';
 import ApiErrorHandler from './utils/ApiErrorHandler.js';
 
 const app = express();
@@ -12,7 +13,7 @@ const app = express();
 // Middlewares
 app.use(express.json());
 app.use(cors());
-if (process.env.NODE_DEV === 'development') {
+if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
 }
 
@@ -20,6 +21,7 @@ if (process.env.NODE_DEV === 'development') {
 app.use('/api/users', userRoute);
 app.use('/api/product', productRoute);
 app.use('/api/cart', cartRoute);
+app.use('/api/categories', categoryRoute);
 
 // Handle undefined routes (404 Not Found)
 app.use((req, res, next) => {
