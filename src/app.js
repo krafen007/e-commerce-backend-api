@@ -1,10 +1,11 @@
 import cors from 'cors';
 import express from 'express';
 import morgan from 'morgan';
-import errorHandler from './middlewares/errorHandler.js';
 import cartRoute from './routes/cartRoute.js';
 import productRoute from './routes/productRoute.js';
 import userRoute from './routes/userRoute.js';
+import errorHandlerMiddleware from './middlewares/ErrorHandlerMiddleware.js';
+import ApiErrorHandler from './utils/ApiErrorHandler.js';
 
 const app = express();
 
@@ -18,12 +19,12 @@ app.use('/api/users', userRoute);
 app.use('/api/product', productRoute);
 app.use('/api/cart', cartRoute);
 
-// Route 404
-app.use((req, res) => {
-  res.send('Page not found 404');
+// Handle undefined routes (404 Not Found)
+app.use((req, res, next) => {
+    next(new ApiErrorHandler(`The route ${req.originalUrl} does not exist`, 404));
 });
 
 // Error Handler
-app.use(errorHandler);
+app.use(errorHandlerMiddleware);
 
 export default app;

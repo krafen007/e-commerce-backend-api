@@ -4,10 +4,11 @@ import connectDB from './config/connectDB.js';
 
 dotenv.config();
 
+// DB Connection
 connectDB();
 
 const PORT = process.env.PORT;
 app.listen(PORT, (err) => {
-  if (err) throw err;
-  console.log(`Server running at http://localhost:${PORT}`);
+    if (err) throw err;
+    console.log(`Server running at http://localhost:${PORT}`);
 });
