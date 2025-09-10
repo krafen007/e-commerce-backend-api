@@ -28,18 +28,19 @@ export const getProductByIdHandler = async ({ id }) => {
 };
 
 // Create Products Handler
-export const createProductHandler = async ({ title, description, price, category }) => {
+export const createProductHandler = async ({ title, description, price, category, image }) => {
     const product = await productModel.create({
         title,
         description,
         price,
         category,
+        image,
     });
 
     return product;
 };
 // Update Products Handler
-export const updateProductHandler = async ({ id, title, description, price, category }) => {
+export const updateProductHandler = async ({ id, title, description, price, category, image }) => {
     const findProduct = await productModel.findById(id);
     if (!findProduct) {
         throw new ApiErrorHandler(`The product you are trying to update does not exist`, 404);
@@ -52,6 +53,7 @@ export const updateProductHandler = async ({ id, title, description, price, cate
             description,
             price,
             category,
+            image,
         },
         { new: true },
     );

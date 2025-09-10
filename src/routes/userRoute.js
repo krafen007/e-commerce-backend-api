@@ -9,9 +9,7 @@ const router = express.Router();
 router.post('/register', validationMiddleware(registerSchema), register);
 router.post('/login', validationMiddleware(logInSchema), logIn);
 router.get('/profile', authMiddleware, (req, res) => {
-  res
-    .status(200)
-    .send(`Hello mr ${req.user.firstName} your role is: ${req.user.role}`);
+    res.status(200).send(`Hello mr ${req.user.firstName} your role is: ${req.user.role}`);
 });
 
 export default router;

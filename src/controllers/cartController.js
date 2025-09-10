@@ -1,3 +1,4 @@
+import ApiResponseHandler from './../utils/ApiResponseHandler.js';
 import asyncHandler from 'express-async-handler';
 import {
     addToCartHandler,
@@ -16,10 +17,8 @@ export const addToCart = asyncHandler(async (req, res) => {
     const userId = req.user._id;
 
     const cart = await addToCartHandler({ userId, productId, quantity });
-    return res.status(201).json({
-        message: 'Product added to cart',
-        data: cart,
-    });
+
+    res.status(201).json(new ApiResponseHandler(201, 'Product added to cart successfully', cart));
 });
 
 /**
@@ -31,10 +30,7 @@ export const getCart = asyncHandler(async (req, res) => {
     const userId = req.user._id;
     const cart = await getCartHandler({ userId });
 
-    return res.status(200).json({
-        message: 'Fetched cart successfully',
-        data: cart,
-    });
+    res.status(200).json(new ApiResponseHandler(200, 'Fetched cart successfully', cart));
 });
 
 /**
@@ -48,8 +44,7 @@ export const deleteItemFromCart = asyncHandler(async (req, res) => {
 
     const cart = await deleteItemFromCartHandler({ userId, productId });
 
-    return res.status(202).json({
-        message: 'Product removed from cart',
-        data: cart,
-    });
+    res.status(200).json(
+        new ApiResponseHandler(200, 'Product removed from cart successfully', cart),
+    );
 });

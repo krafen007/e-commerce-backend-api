@@ -3,6 +3,7 @@ const errorHandlerMiddleware = (err, req, res, next) => {
 
     res.status(statusCode).json({
         success: false,
+        statusCode,
         status: `${statusCode}`.startsWith(4) ? 'Fail' : 'Error',
         message: err.message,
         ...(process.env.NODE_ENV === 'development' && { stack: err.stack }),

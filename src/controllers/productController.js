@@ -20,7 +20,7 @@ export const getProducts = asyncHandler(async (req, res) => {
         page,
         limit,
     });
-    new ApiResponseHandler(200, 'Fetched products successfully', products)
+
     res.status(200).json({
         message: 'Fetched products successfully',
         page: page,
@@ -39,10 +39,8 @@ export const getProducts = asyncHandler(async (req, res) => {
 export const getProductById = asyncHandler(async (req, res) => {
     const id = req.params.id;
     const product = await getProductByIdHandler({ id });
-    res.status(200).json({
-        message: 'Fetched product successfully',
-        data: product,
-    });
+
+    res.status(200).json(new ApiResponseHandler(200, 'Fetched product successfully', product));
 });
 
 /**
@@ -51,19 +49,17 @@ export const getProductById = asyncHandler(async (req, res) => {
  * @access Admin
  */
 export const createProduct = asyncHandler(async (req, res) => {
-    const { title, description, price, category } = req.body;
+    const { title, description, price, category, image } = req.body;
 
     const product = await createProductHandler({
         title,
         description,
         price,
         category,
+        image,
     });
 
-    res.status(201).json({
-        message: 'Product create successfully',
-        data: product,
-    });
+    res.status(201).json(new ApiResponseHandler(201, 'Product create successfully', product));
 });
 
 /**
@@ -73,7 +69,7 @@ export const createProduct = asyncHandler(async (req, res) => {
  */
 export const updateProduct = asyncHandler(async (req, res) => {
     const id = req.params.id;
-    const { title, description, price, category } = req.body;
+    const { title, description, price, category, image } = req.body;
 
     const product = await updateProductHandler({
         id,
@@ -81,12 +77,10 @@ export const updateProduct = asyncHandler(async (req, res) => {
         description,
         price,
         category,
+        image,
     });
 
-    res.status(200).json({
-        message: 'Product updated successfully',
-        data: product,
-    });
+    res.status(200).json(new ApiResponseHandler(200, 'Product updated successfully', product));
 });
 
 /**
@@ -99,8 +93,7 @@ export const deleteProduct = asyncHandler(async (req, res) => {
 
     const deletedProduct = await deleteProductHandler({ id });
 
-    res.status(202).json({
-        message: 'Product deleted successfully',
-        data: deletedProduct,
-    });
+    res.status(202).json(
+        new ApiResponseHandler(200, 'Product deleted successfully', deletedProduct),
+    );
 });

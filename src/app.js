@@ -12,7 +12,9 @@ const app = express();
 // Middlewares
 app.use(express.json());
 app.use(cors());
-app.use(morgan('dev'));
+if (process.env.NODE_DEV === 'development') {
+    app.use(morgan('dev'));
+}
 
 // Routes
 app.use('/api/users', userRoute);

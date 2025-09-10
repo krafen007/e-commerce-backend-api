@@ -1,35 +1,31 @@
 import jwt from 'jsonwebtoken';
+import ApiErrorHandler from '../utils/ApiErrorHandler.js';
+import asyncHandler from 'express-async-handler';
 import userModel from '../models/userModel.js';
 
-const authMiddleware = async (req, res, next) => {
-  try {
+const authMiddleware = asyncHandler(async (req, res, next) => {
     const authHead = req.headers.authorization;
     if (!authHead || !authHead.startsWith('Bearer ')) {
-      return res.status(401).json({
-        message: 'Not authorized, Token missing or malformed',
-      });
+        throw new ApiErrorHandler('Not authorized, Token missing or malformed', 401);
     }
     const token = authHead.split(' ')[1];
 
-    const decoded = jwt.verify(token, process.env.SECRET_KEY);
+    let decoded;
+
+    try {
+        decoded = jwt.verify(token, process.env.SECRET_KEY);
+    } catch (error) {
+        throw new ApiErrorHandler('Not authorized: invalid or expired token', 401);
+    }
 
     const user = await userModel.findById(decoded.userId);
 
     if (!user) {
-      return res.status(401).json({
-        message: 'Not authorized, invalid or expired token',
-      });
+        throw new ApiErrorHandler('Not authorized, invalid or expired token', 401);
     }
 
     req.user = user;
 
     next();
-  } catch (error) {
-    return res.status(500).json({
-      message: 'Internal server error in authMiddleware',
-      error: error.message,
-    });
-  }
-};
-
+});
 export default authMiddleware;
