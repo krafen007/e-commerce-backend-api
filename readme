@@ -1,69 +1,69 @@
 🛒 E-Commerce Backend API
 
-A fully functional E-Commerce backend built with Node.js, Express, and MongoDB.
-This project demonstrates authentication, role-based access control, product & category management, cart management, and global error handling with a clean and scalable architecture.
+    A fully functional E-Commerce backend built with Node.js, Express, and MongoDB.
+    This project demonstrates authentication, role-based access control, product & category management, cart management, and global error handling with a clean and scalable architecture.
 
 🚀 Features
 
-🔑 User Authentication & Authorization
+  🔑 User Authentication & Authorization
 
-Register / Login with JWT
+      Register / Login with JWT
 
-Role-based access (Admin, Customer)
+      Role-based access (Admin, Customer)
 
-Protected routes with auth middleware
+      Protected routes with auth middleware
 
-📦 Product Management
+  📦 Product Management
 
-Create, Read, Update, Delete products (Admin only)
+      Create, Read, Update, Delete products (Admin only)
 
-Public product listing & details
+      Public product listing & details
 
-Pagination and search by product title
+      Pagination and search by product title
 
-🏷️ Category Management
+  🏷️ Category Management
 
-Create, Read, Update, Delete categories (Admin only)
+      Create, Read, Update, Delete categories (Admin only)
 
-Public category listing & details
+      Public category listing & details
 
-Slug generation for categories
+      Slug generation for categories
 
-🛒 Shopping Cart
+  🛒 Shopping Cart
 
-Add / Remove products from cart
+      Add / Remove products from cart
 
-Decrement product quantity
+      Decrement product quantity
 
-Auto calculate total price
+      Auto calculate total price
 
-One active cart per user
+      One active cart per user
 
-⚡ Error Handling & Middlewares
+  ⚡ Error Handling & Middlewares
 
-Global error handler
+      Global error handler
 
-Authentication middleware
+      Authentication middleware
 
-Role-based permission middleware
+      Role-based permission middleware
 
-Validation middleware (Joi)
+      Validation middleware (Joi)
 
 🛠️ Tech Stack
 
-    Node.js + Express.js
+     Node.js + Express.js
 
-    MongoDB + Mongoose
+     MongoDB + Mongoose
 
-    JWT
+     JWT
 
-    bcrypt
+     bcrypt
 
-    Morgan
+     Morgan
 
-    Dotenv
+     Dotenv
 
-    Joi (Validation)
+     Joi (Validation)
 
 📂 Project Structure
 
